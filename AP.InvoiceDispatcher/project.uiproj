@@ -1,0 +1,6 @@
+{
+  "Name": "AP.InvoiceDispatcher",
+  "ProjectType": "Process",
+  "Description": "IMAP invoice intake dispatcher for the AP_Invoices Orchestrator queue.",
+  "MainFile": "Main.xaml"
+}

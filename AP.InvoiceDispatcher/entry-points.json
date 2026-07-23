@@ -1,0 +1,119 @@
+{
+  "$schema": "https://cloud.uipath.com/draft/2024-12/entry-point",
+  "entryPoints": [
+    {
+      "filePath": "Main.xaml",
+      "uniqueId": "81f8fc2d-3dae-4a52-80f8-01c84050600d",
+      "type": "process",
+      "input": {
+        "type": "object",
+        "properties": {
+          "in_ConfigData": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "is_ConfigurationValid": {
+            "type": "string"
+          },
+          "in_ConfigurationValid": {
+            "type": "boolean"
+          },
+          "in_EmailAttachments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/job-attachment"
+            }
+          },
+          "in_is_AttachmentDownloaded": {
+            "type": "boolean"
+          },
+          "in_UploadedOnQueue": {
+            "type": "boolean"
+          }
+        },
+        "required": [],
+        "definitions": {
+          "job-attachment": {
+            "type": "object",
+            "properties": {
+              "ID": {
+                "type": "string",
+                "description": "Orchestrator attachment key"
+              },
+              "FullName": {
+                "type": "string",
+                "description": "File name"
+              },
+              "MimeType": {
+                "type": "string",
+                "description": "The MIME type of the content, such as \"application/json\" or \"image/png"
+              },
+              "Metadata": {
+                "type": "object",
+                "description": "Dictionary<string, string> of metadata",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "ID"
+            ],
+            "x-uipath-resource-kind": "JobAttachment"
+          }
+        }
+      }
+    },
+    {
+      "filePath": "Process\\02_DownloadInvoice.xaml",
+      "uniqueId": "c3dcd83f-d89b-41ff-97a4-2a2060567a58",
+      "type": "process",
+      "output": {
+        "type": "object",
+        "properties": {
+          "EmailAttachments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/job-attachment"
+            }
+          },
+          "is_AttachementDownloaded": {
+            "type": "boolean"
+          }
+        },
+        "definitions": {
+          "job-attachment": {
+            "type": "object",
+            "properties": {
+              "ID": {
+                "type": "string",
+                "description": "Orchestrator attachment key"
+              },
+              "FullName": {
+                "type": "string",
+                "description": "File name"
+              },
+              "MimeType": {
+                "type": "string",
+                "description": "The MIME type of the content, such as \"application/json\" or \"image/png"
+              },
+              "Metadata": {
+                "type": "object",
+                "description": "Dictionary<string, string> of metadata",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "ID"
+            ],
+            "x-uipath-resource-kind": "JobAttachment"
+          }
+        }
+      }
+    }
+  ]
+}

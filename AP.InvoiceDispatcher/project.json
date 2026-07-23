@@ -1,0 +1,73 @@
+{
+  "name": "AP.InvoiceDispatcher",
+  "projectId": "e03c45cc-3f08-4136-ad3c-62c9a26e7e68",
+  "description": "IMAP invoice intake dispatcher for the AP_Invoices Orchestrator queue.",
+  "main": "Main.xaml",
+  "dependencies": {
+    "UiPath.DocumentUnderstanding.Activities": "[3.3.0]",
+    "UiPath.DocumentUnderstanding.Digitizer": "[5.3.0]",
+    "UiPath.DocumentUnderstanding.ML.Activities": "[2.3.0]",
+    "UiPath.DocumentUnderstanding.Orchestrator": "[2.0.9]",
+    "UiPath.Excel.Activities": "[3.5.1]",
+    "UiPath.GSuite.Activities": "[3.10.10]",
+    "UiPath.IntegrationService.Activities": "[1.29.0]",
+    "UiPath.IntelligentOCR.Activities": "[7.3.0]",
+    "UiPath.MicrosoftOffice365.Activities": "[3.10.10]",
+    "UiPath.System.Activities": "[26.6.1]",
+    "UiPath.UIAutomation.Activities": "[26.10.0]"
+  },
+  "webServices": [],
+  "entitiesStores": [],
+  "schemaVersion": "4.0",
+  "studioVersion": "26.0.197.0",
+  "projectVersion": "1.0.0",
+  "runtimeOptions": {
+    "autoDispose": false,
+    "netFrameworkLazyLoading": false,
+    "isPausable": true,
+    "isAttended": false,
+    "requiresUserInteraction": true,
+    "supportsPersistence": true,
+    "workflowSerialization": "NewtonsoftJson",
+    "excludedLoggedData": [
+      "Private:*",
+      "*password*"
+    ],
+    "executionType": "Workflow",
+    "readyForPiP": false,
+    "startsInPiP": false,
+    "mustRestoreAllDependencies": true,
+    "pipType": "ChildSession"
+  },
+  "designOptions": {
+    "projectProfile": "Developement",
+    "outputType": "Process",
+    "libraryOptions": {
+      "privateWorkflows": []
+    },
+    "processOptions": {
+      "ignoredFiles": []
+    },
+    "fileInfoCollection": [],
+    "saveToCloud": false
+  },
+  "expressionLanguage": "VisualBasic",
+  "entryPoints": [
+    {
+      "filePath": "Main.xaml",
+      "uniqueId": "81f8fc2d-3dae-4a52-80f8-01c84050600d",
+      "input": [],
+      "output": []
+    },
+    {
+      "filePath": "Process\\02_DownloadInvoice.xaml",
+      "uniqueId": "c3dcd83f-d89b-41ff-97a4-2a2060567a58",
+      "input": [],
+      "output": []
+    }
+  ],
+  "isTemplate": false,
+  "templateProjectData": {},
+  "publishData": {},
+  "targetFramework": "Windows"
+}

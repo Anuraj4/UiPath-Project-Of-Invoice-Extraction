@@ -1,0 +1,6 @@
+{
+  "Name": "AP.InvoicePerformer",
+  "ProjectType": "Process",
+  "Description": "This is the performer which takes queue items from queue and extract the details and create validation request according to the document type.",
+  "MainFile": "Main-ActionCenter.xaml"
+}

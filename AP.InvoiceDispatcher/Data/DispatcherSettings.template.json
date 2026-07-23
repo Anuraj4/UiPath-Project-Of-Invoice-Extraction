@@ -1,0 +1,6 @@
+{
+  "orchestrator": {"folderPath": "UiPath Project", "queueName": "AP_Invoices", "storageBucketName": "ap-invoice-evidence", "credentialAssetName": "AP_ImapCredential"},
+  "imap": {"host": "imap.dev.example.invalid", "port": 993, "useSsl": true, "mailboxAddress": "ap-invoices-dev@example.invalid", "inboxFolder": "Inbox", "processedFolder": "Processed", "rejectedFolder": "Rejected", "localStagingFolder": "C:\\UiPath\\APInvoiceDispatcher\\Staging"},
+  "validation": {"allowedAttachmentExtension": ".pdf", "maxAttachmentMegabytes": 25, "allowedSenderDomains": ["example.invalid"]},
+  "queuePayloadSchema": {"schemaVersion": "1.0", "requiredFields": ["SourceMessageId", "SourceReceivedUtc", "SourceSender", "SourceSubject", "AttachmentName", "AttachmentContentType", "AttachmentBytes", "AttachmentSha256", "BucketName", "BucketObjectKey", "MailboxFolder", "DispatcherRunId", "SchemaVersion"]}
+}
