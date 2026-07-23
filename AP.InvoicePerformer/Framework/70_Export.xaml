@@ -5,6 +5,7 @@
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:String))" />
     <x:Property sap2010:Annotation.AnnotationText="Used to control the number of attempts of retrying in case of a system exception." Name="in_MaxAttempts" Type="InArgument(x:Int32)" />
     <x:Property sap2010:Annotation.AnnotationText="Used to control the amount of time between retries in the Retry Scope activity." Name="in_RetryInterval" Type="InArgument(x:TimeSpan)" />
+    <x:Property Name="out_InputJSON" Type="OutArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -133,7 +134,7 @@
       <AssemblyReference>Newtonsoft.Json</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Post-extraction &amp; Data Export&#xA;&#xA;Post extraction - any logic that must be executed after data extraction and prior to the data export belongs here (eg: format the data according to an export schema)&#xA;&#xA;Data Export - output the data to make it usable by the Business users or by subsequent processes. We recommend using UiPath's DataService." DisplayName="Export" sap:VirtualizedContainerService.HintSize="813.2,3050.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Post-extraction &amp; Data Export&#xA;&#xA;Post extraction - any logic that must be executed after data extraction and prior to the data export belongs here (eg: format the data according to an export schema)&#xA;&#xA;Data Export - output the data to make it usable by the Business users or by subsequent processes. We recommend using UiPath's DataService." DisplayName="Export" sap:VirtualizedContainerService.HintSize="813.2,2928" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Used to store the path to the file where the extracted data will be saved." Name="outputPath" />
       <Variable x:TypeArguments="sd:DataSet" sap2010:Annotation.AnnotationText="Used to store the exported data from the ExtractionResults in the Export Extraction Results activity." Name="exportDataSet" />
@@ -141,7 +142,6 @@
       <Variable x:TypeArguments="x:String" Name="OutputText" />
       <Variable x:TypeArguments="x:String" Name="ExtractedTableJSONString" />
       <Variable x:TypeArguments="upau:UserActionData" Name="AppTaskOutput" />
-      <Variable x:TypeArguments="x:String" Name="DeserializedJSON" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -224,13 +224,12 @@
     </ui:CommentOut>
     <Assign sap:VirtualizedContainerService.HintSize="449.6,174.4" sap2010:WorkflowViewState.IdRef="Assign_2">
       <Assign.To>
-        <OutArgument x:TypeArguments="x:String">[DeserializedJSON]</OutArgument>
+        <OutArgument x:TypeArguments="x:String">[out_InputJSON]</OutArgument>
       </Assign.To>
       <Assign.Value>
         <InArgument x:TypeArguments="x:String">[Newtonsoft.Json.JsonConvert.SerializeObject(DT_ExtractedData)]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="449.6,122.4" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[DeserializedJSON]" />
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="449.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;App Request Created&quot;]" />
     <upau:CreateUserAction AutoCompleteOutcome="{x:Null}" ExternalTag="{x:Null}" Group="{x:Null}" Labels="{x:Null}" PrimaryActionableOutcome="{x:Null}" PrimaryButtonLabel="{x:Null}" ReassignUser="{x:Null}" SecondaryActionableOutcome="{x:Null}" SecondaryButtonLabel="{x:Null}" TaskFieldsForDesktop="{x:Null}" TaskFieldsForWeb="{x:Null}" TaskOutput="{x:Null}" TimeoutMs="{x:Null}" TimerDuration="{x:Null}" ActionableNotification="False" DisplayName="Create App Task" EndCriteria="TaskAssigned" EnforcePropertyRefresh="False" FolderPath="UiPath Project" sap:VirtualizedContainerService.HintSize="449.6,569.6" sap2010:WorkflowViewState.IdRef="CreateUserAction_2" Outcome="Notify" SolutionApp="UiPath Project Using Table JSON String" SolutionTaskCatalog="InvoiceCatalog" StartCriteria="TaskCreated" TaskCatalog="InvoiceCatalog" TaskPriority="Medium" TaskTimerEnabled="False" TaskTitle="Validat" UserNameOrEmail="anuraj.venkatpurwar@xalta.tech">
       <upau:CreateUserAction.AppActionData>
