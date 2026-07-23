@@ -192,7 +192,16 @@
           "DeriveFieldsFormat": "",
           "Components": [],
           "SetValues": [],
-          "Metadata": [],
+          "Metadata": [
+            {
+              "Key": "EnableValidatorNotes",
+              "Value": "true"
+            },
+            {
+              "Key": "ValidatorNotesSettings",
+              "Value": "{\"Type\":\"Text\",\"ReadOnly\":false,\"TypeSettings\":{\"OptionSet\":[]}}"
+            }
+          ],
           "RuleSet": null,
           "DefaultValue": "",
           "DataSource": null
@@ -205,7 +214,16 @@
           "DeriveFieldsFormat": "",
           "Components": [],
           "SetValues": [],
-          "Metadata": [],
+          "Metadata": [
+            {
+              "Key": "EnableValidatorNotes",
+              "Value": "true"
+            },
+            {
+              "Key": "ValidatorNotesSettings",
+              "Value": "{\"Type\":\"Text\",\"ReadOnly\":false,\"TypeSettings\":{\"OptionSet\":[]}}"
+            }
+          ],
           "RuleSet": null,
           "DefaultValue": "",
           "DataSource": null
@@ -218,72 +236,16 @@
           "DeriveFieldsFormat": "",
           "Components": [],
           "SetValues": [],
-          "Metadata": [],
-          "RuleSet": null,
-          "DefaultValue": "",
-          "DataSource": null
-        },
-        {
-          "FieldId": "Semi-StructuredDocuments.Financial.Invoice.BillingAddress",
-          "FieldName": "Billing Address",
-          "IsMultiValue": false,
-          "Type": "Address",
-          "DeriveFieldsFormat": "",
-          "Components": [],
-          "SetValues": [],
-          "Metadata": [],
-          "RuleSet": null,
-          "DefaultValue": "",
-          "DataSource": null
-        },
-        {
-          "FieldId": "Semi-StructuredDocuments.Financial.Invoice.BillingVATNo",
-          "FieldName": "Billing VAT Number",
-          "IsMultiValue": false,
-          "Type": "Text",
-          "DeriveFieldsFormat": "",
-          "Components": [],
-          "SetValues": [],
-          "Metadata": [],
-          "RuleSet": null,
-          "DefaultValue": "",
-          "DataSource": null
-        },
-        {
-          "FieldId": "Semi-StructuredDocuments.Financial.Invoice.ShippingAddress",
-          "FieldName": "Shipping Address",
-          "IsMultiValue": false,
-          "Type": "Address",
-          "DeriveFieldsFormat": "",
-          "Components": [],
-          "SetValues": [],
-          "Metadata": [],
-          "RuleSet": null,
-          "DefaultValue": "",
-          "DataSource": null
-        },
-        {
-          "FieldId": "Semi-StructuredDocuments.Financial.Invoice.PaymentAddress",
-          "FieldName": "Payment Address",
-          "IsMultiValue": false,
-          "Type": "Address",
-          "DeriveFieldsFormat": "",
-          "Components": [],
-          "SetValues": [],
-          "Metadata": [],
-          "RuleSet": null,
-          "DefaultValue": "",
-          "DataSource": null
-        },
-        {
-          "FieldId": "Semi-StructuredDocuments.Financial.Invoice.VendorVATNo",
-          "FieldName": "Vendor VAT Number",
-          "IsMultiValue": false,
-          "Type": "Text",
-          "DeriveFieldsFormat": "",
-          "Components": [],
-          "SetValues": [],
-          "Metadata": [],
+          "Metadata": [
+            {
+              "Key": "EnableValidatorNotes",
+              "Value": "true"
+            },
+            {
+              "Key": "ValidatorNotesSettings",
+              "Value": "{\"Type\":\"Text\",\"ReadOnly\":false,\"TypeSettings\":{\"OptionSet\":[]}}"
+            }
+          ],
           "RuleSet": null,
           "DefaultValue": "",
           "DataSource": null
@@ -296,7 +258,16 @@
           "DeriveFieldsFormat": "",
           "Components": [],
           "SetValues": [],
-          "Metadata": [],
+          "Metadata": [
+            {
+              "Key": "EnableValidatorNotes",
+              "Value": "true"
+            },
+            {
+              "Key": "ValidatorNotesSettings",
+              "Value": "{\"Type\":\"Text\",\"ReadOnly\":false,\"TypeSettings\":{\"OptionSet\":[]}}"
+            }
+          ],
           "RuleSet": null,
           "DefaultValue": "",
           "DataSource": null
@@ -309,7 +280,16 @@
           "DeriveFieldsFormat": "",
           "Components": [],
           "SetValues": [],
-          "Metadata": [],
+          "Metadata": [
+            {
+              "Key": "EnableValidatorNotes",
+              "Value": "true"
+            },
+            {
+              "Key": "ValidatorNotesSettings",
+              "Value": "{\"Type\":\"Text\",\"ReadOnly\":false,\"TypeSettings\":{\"OptionSet\":[]}}"
+            }
+          ],
           "RuleSet": null,
           "DefaultValue": "",
           "DataSource": null
@@ -322,33 +302,16 @@
           "DeriveFieldsFormat": "",
           "Components": [],
           "SetValues": [],
-          "Metadata": [],
-          "RuleSet": null,
-          "DefaultValue": "",
-          "DataSource": null
-        },
-        {
-          "FieldId": "Semi-StructuredDocuments.Financial.Invoice.PONo",
-          "FieldName": "PO Number",
-          "IsMultiValue": false,
-          "Type": "Text",
-          "DeriveFieldsFormat": "",
-          "Components": [],
-          "SetValues": [],
-          "Metadata": [],
-          "RuleSet": null,
-          "DefaultValue": "",
-          "DataSource": null
-        },
-        {
-          "FieldId": "Semi-StructuredDocuments.Financial.Invoice.PaymentTerms",
-          "FieldName": "Payment Terms",
-          "IsMultiValue": false,
-          "Type": "Text",
-          "DeriveFieldsFormat": "",
-          "Components": [],
-          "SetValues": [],
-          "Metadata": [],
+          "Metadata": [
+            {
+              "Key": "EnableValidatorNotes",
+              "Value": "true"
+            },
+            {
+              "Key": "ValidatorNotesSettings",
+              "Value": "{\"Type\":\"Text\",\"ReadOnly\":false,\"TypeSettings\":{\"OptionSet\":[]}}"
+            }
+          ],
           "RuleSet": null,
           "DefaultValue": "",
           "DataSource": null
@@ -361,7 +324,16 @@
           "DeriveFieldsFormat": "",
           "Components": [],
           "SetValues": [],
-          "Metadata": [],
+          "Metadata": [
+            {
+              "Key": "EnableValidatorNotes",
+              "Value": "true"
+            },
+            {
+              "Key": "ValidatorNotesSettings",
+              "Value": "{\"Type\":\"Text\",\"ReadOnly\":false,\"TypeSettings\":{\"OptionSet\":[]}}"
+            }
+          ],
           "RuleSet": null,
           "DefaultValue": "",
           "DataSource": null
@@ -374,20 +346,16 @@
           "DeriveFieldsFormat": "",
           "Components": [],
           "SetValues": [],
-          "Metadata": [],
-          "RuleSet": null,
-          "DefaultValue": "",
-          "DataSource": null
-        },
-        {
-          "FieldId": "Semi-StructuredDocuments.Financial.Invoice.NetAmount",
-          "FieldName": "Net Amount",
-          "IsMultiValue": false,
-          "Type": "Text",
-          "DeriveFieldsFormat": "",
-          "Components": [],
-          "SetValues": [],
-          "Metadata": [],
+          "Metadata": [
+            {
+              "Key": "EnableValidatorNotes",
+              "Value": "true"
+            },
+            {
+              "Key": "ValidatorNotesSettings",
+              "Value": "{\"Type\":\"Text\",\"ReadOnly\":false,\"TypeSettings\":{\"OptionSet\":[]}}"
+            }
+          ],
           "RuleSet": null,
           "DefaultValue": "",
           "DataSource": null
@@ -400,20 +368,16 @@
           "DeriveFieldsFormat": "",
           "Components": [],
           "SetValues": [],
-          "Metadata": [],
-          "RuleSet": null,
-          "DefaultValue": "",
-          "DataSource": null
-        },
-        {
-          "FieldId": "Semi-StructuredDocuments.Financial.Invoice.Discount",
-          "FieldName": "Discount",
-          "IsMultiValue": false,
-          "Type": "Text",
-          "DeriveFieldsFormat": "",
-          "Components": [],
-          "SetValues": [],
-          "Metadata": [],
+          "Metadata": [
+            {
+              "Key": "EnableValidatorNotes",
+              "Value": "true"
+            },
+            {
+              "Key": "ValidatorNotesSettings",
+              "Value": "{\"Type\":\"Text\",\"ReadOnly\":false,\"TypeSettings\":{\"OptionSet\":[]}}"
+            }
+          ],
           "RuleSet": null,
           "DefaultValue": "",
           "DataSource": null
@@ -518,7 +482,16 @@
             }
           ],
           "SetValues": [],
-          "Metadata": [],
+          "Metadata": [
+            {
+              "Key": "EnableValidatorNotes",
+              "Value": "true"
+            },
+            {
+              "Key": "ValidatorNotesSettings",
+              "Value": "{\"Type\":\"Text\",\"ReadOnly\":false,\"TypeSettings\":{\"OptionSet\":[]}}"
+            }
+          ],
           "RuleSet": null,
           "DefaultValue": "",
           "DataSource": null
@@ -539,6 +512,14 @@
             {
               "Key": "Hotkey",
               "Value": "a"
+            },
+            {
+              "Key": "EnableValidatorNotes",
+              "Value": "true"
+            },
+            {
+              "Key": "ValidatorNotesSettings",
+              "Value": "{\"Type\":\"Text\",\"ReadOnly\":false,\"TypeSettings\":{\"OptionSet\":[]}}"
             }
           ],
           "RuleSet": null,
