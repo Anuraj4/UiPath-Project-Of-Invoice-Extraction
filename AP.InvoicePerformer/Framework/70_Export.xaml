@@ -259,9 +259,11 @@
     </Assign>
     <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="449.6,122.4" sap2010:WorkflowViewState.IdRef="MessageBox_3" Text="[appURL]" />
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="449.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;App Request Created&quot;]" />
-    <ui:InvokeCode ContinueOnError="{x:Null}" Code="Try&#xD;&#xA;    If Not String.IsNullOrEmpty(appURL) Then&#xD;&#xA;        Dim psi As New System.Diagnostics.ProcessStartInfo(appURL)&#xD;&#xA;        psi.UseShellExecute = True&#xD;&#xA;        System.Diagnostics.Process.Start(psi)&#xD;&#xA;    End If&#xD;&#xA;Catch ex As Exception&#xD;&#xA;    System.Diagnostics.Debug.WriteLine(ex.Message)&#xD;&#xA;End Try" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="449.6,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_2">
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="Try&#xA;    If Not String.IsNullOrEmpty(appURL) Then&#xA;        Dim psi As New System.Diagnostics.ProcessStartInfo(appURL)&#xA;        psi.UseShellExecute = True&#xA;        System.Diagnostics.Process.Start(psi)&#xA;    End If&#xA;Catch ex As Exception&#xA;    System.Diagnostics.Debug.WriteLine(ex.Message)&#xA;End Try" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="449.6,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_2">
       <ui:InvokeCode.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="appURL">[appURL]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="appURL">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="appURL" />
+        </InArgument>
       </ui:InvokeCode.Arguments>
     </ui:InvokeCode>
     <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="449.6,48" sap2010:WorkflowViewState.IdRef="CommentOut_2">
