@@ -1,13 +1,14 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="_70_Export" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:p="http://schemas.uipath.com/workflow/activities/document-processing-contracts/results" xmlns:p1="http://schemas.uipath.com/workflow/activities/intelligentocr/extraction" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:upama="clr-namespace:UiPath.Persistence.Activities.Model.Apps;assembly=UiPath.Persistence.Activities" xmlns:upat="clr-namespace:UiPath.Persistence.Activities.Tasks;assembly=UiPath.Persistence.Activities" xmlns:upau="clr-namespace:UiPath.Persistence.Activities.UserAction;assembly=UiPath.Persistence.Activities" xmlns:uwaj="clr-namespace:UiPath.Web.Activities.JSON;assembly=UiPath.Web.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="_70_Export" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:p="http://schemas.uipath.com/workflow/activities/document-processing-contracts/results" xmlns:p1="http://schemas.uipath.com/workflow/activities/intelligentocr/extraction" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:upama="clr-namespace:UiPath.Persistence.Activities.Model.Apps;assembly=UiPath.Persistence.Activities" xmlns:upat="clr-namespace:UiPath.Persistence.Activities.Tasks;assembly=UiPath.Persistence.Activities" xmlns:upau="clr-namespace:UiPath.Persistence.Activities.UserAction;assembly=UiPath.Persistence.Activities" xmlns:uwaj="clr-namespace:UiPath.Web.Activities.JSON;assembly=UiPath.Web.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="in_ValidatedDataTableFromApp" Type="InArgument(sd:DataTable)" />
     <x:Property sap2010:Annotation.AnnotationText="The results of the data extraction process." Name="in_ExtractionResults" Type="InArgument(p:ExtractionResult)" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:String))" />
     <x:Property sap2010:Annotation.AnnotationText="Used to control the number of attempts of retrying in case of a system exception." Name="in_MaxAttempts" Type="InArgument(x:Int32)" />
     <x:Property sap2010:Annotation.AnnotationText="Used to control the amount of time between retries in the Retry Scope activity." Name="in_RetryInterval" Type="InArgument(x:TimeSpan)" />
-    <x:Property Name="out_InputJSON" Type="OutArgument(x:String)" />
-    <x:Property Name="out_JSON" Type="OutArgument(x:String)" />
+    <x:Property Name="out_TableData" Type="InArgument(x:String)" />
   </x:Members>
+  <this:_70_Export.out_TableData>
+    <InArgument x:TypeArguments="x:String" />
+  </this:_70_Export.out_TableData>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
@@ -65,6 +66,7 @@
       <x:String>UiPath.Sdk.Activities.DependencyInjection</x:String>
       <x:String>UiPath.Sdk.Activities.DependencyInjection.Contracts</x:String>
       <x:String>Newtonsoft.Json</x:String>
+      <x:String>Newtonsoft.Json.Linq</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -146,17 +148,14 @@
       <AssemblyReference>System.Linq.Queryable</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Post-extraction &amp; Data Export&#xA;&#xA;Post extraction - any logic that must be executed after data extraction and prior to the data export belongs here (eg: format the data according to an export schema)&#xA;&#xA;Data Export - output the data to make it usable by the Business users or by subsequent processes. We recommend using UiPath's DataService." DisplayName="Export" sap:VirtualizedContainerService.HintSize="714.8000000000001,3310.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Post-extraction &amp; Data Export&#xA;&#xA;Post extraction - any logic that must be executed after data extraction and prior to the data export belongs here (eg: format the data according to an export schema)&#xA;&#xA;Data Export - output the data to make it usable by the Business users or by subsequent processes. We recommend using UiPath's DataService." DisplayName="Export" sap:VirtualizedContainerService.HintSize="1081.2,3034.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="scg:List(scg:Dictionary(x:String, x:Object))" Name="out_List" />
-      <Variable x:TypeArguments="x:String" Default="https://cloud.uipath.com/49f06dc5-3e87-4b91-916d-00edd57c93b3/apps_/default/run/production/fa5c81a3-16f7-4b7c-8976-f06a5287ce18/719ac229-5f90-4230-b11c-b397a87de928/ID217f18de62f8475dafc0adb9c6f8167b/public?" Name="UiPathAPPURL" />
       <Variable x:TypeArguments="x:String" sap2010:Annotation.AnnotationText="Used to store the path to the file where the extracted data will be saved." Name="outputPath" />
       <Variable x:TypeArguments="sd:DataSet" sap2010:Annotation.AnnotationText="Used to store the exported data from the ExtractionResults in the Export Extraction Results activity." Name="exportDataSet" />
       <Variable x:TypeArguments="sd:DataTable" Name="DT_ExtractedData" />
       <Variable x:TypeArguments="x:String" Name="OutputText" />
-      <Variable x:TypeArguments="x:String" Name="ExtractedTableJSONString" />
-      <Variable x:TypeArguments="x:String" Name="EncodedJSON" />
-      <Variable x:TypeArguments="x:String" Name="appURL" />
+      <Variable x:TypeArguments="upau:UserActionData" Name="AppTaskOutput" />
+      <Variable x:TypeArguments="upau:UserActionData" Name="TaskObject" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -219,169 +218,54 @@
     <ui:ReadRange Range="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[DT_ExtractedData]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="449.6,120" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="Simple Fields" WorkbookPath="[outputPath]" />
     <ui:OutputDataTable DataTable="[DT_ExtractedData]" DisplayName="Output Data Table as Text" sap:VirtualizedContainerService.HintSize="449.6,112.8" sap2010:WorkflowViewState.IdRef="OutputDataTable_1" Text="[OutputText]" />
     <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="449.6,122.4" sap2010:WorkflowViewState.IdRef="MessageBox_2" Text="[OutputText]" />
-    <Assign sap:VirtualizedContainerService.HintSize="449.6,174.4" sap2010:WorkflowViewState.IdRef="Assign_6">
-      <Assign.To>
-        <OutArgument x:TypeArguments="scg:List(scg:Dictionary(x:String, x:Object))">[out_List]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="scg:List(scg:Dictionary(x:String, x:Object))">[DT_ExtractedData.AsEnumerable().Select(Function(row) DT_ExtractedData.Columns.Cast(Of System.Data.DataColumn)().ToDictionary(Function(col) col.ColumnName, Function(col) row(col))).ToList()]</InArgument>
-      </Assign.Value>
-    </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="449.6,174.4" sap2010:WorkflowViewState.IdRef="Assign_7">
-      <Assign.To>
-        <OutArgument x:TypeArguments="x:String">[out_JSON]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[JsonConvert.SerializeObject(out_List)]</InArgument>
-      </Assign.Value>
-    </Assign>
-    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="449.6,122.4" sap2010:WorkflowViewState.IdRef="MessageBox_4" Text="[out_Json]" />
-    <Assign sap:VirtualizedContainerService.HintSize="449.6,174.4" sap2010:WorkflowViewState.IdRef="Assign_8">
-      <Assign.To>
-        <OutArgument x:TypeArguments="x:String">[EncodedJSON]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[System.Uri.EscapeDataString(out_Json)]</InArgument>
-      </Assign.Value>
-    </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="449.6,174.4" sap2010:WorkflowViewState.IdRef="Assign_9">
-      <Assign.To>
-        <OutArgument x:TypeArguments="x:String">[appURL]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[UiPathAppURL + "invoiceJson=" + EncodedJSON]</InArgument>
-      </Assign.Value>
-    </Assign>
-    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="449.6,122.4" sap2010:WorkflowViewState.IdRef="MessageBox_5" Text="[appURL]" />
-    <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim psi As New System.Diagnostics.ProcessStartInfo(appUrl)&#xD;&#xA;psi.UseShellExecute = True&#xD;&#xA;System.Diagnostics.Process.Start(psi)" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="449.6,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_3">
+    <uwaj:SerializeJson Settings="{x:Null}" DisplayName="Serialize JSON" sap:VirtualizedContainerService.HintSize="449.6,122.4" sap2010:WorkflowViewState.IdRef="SerializeJson_2" InputObject="[DT_ExtractedData]" Result="[out_TableData]" />
+    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="449.6,122.4" sap2010:WorkflowViewState.IdRef="MessageBox_6" Text="[out_TableData]" />
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="Dim jArray As Newtonsoft.Json.Linq.JArray = Newtonsoft.Json.Linq.JArray.Parse(InvoiceJsonString)&#xD;&#xA;&#xD;&#xA;Dim dt As New DataTable()&#xD;&#xA;Dim allKeys As New List(Of String)&#xD;&#xA;&#xD;&#xA;' Collect all unique keys&#xD;&#xA;For Each jt As Newtonsoft.Json.Linq.JToken In jArray&#xD;&#xA;    Dim jo As Newtonsoft.Json.Linq.JObject = CType(jt, Newtonsoft.Json.Linq.JObject)&#xD;&#xA;    For Each prop As Newtonsoft.Json.Linq.JProperty In jo.Properties()&#xD;&#xA;        If Not allKeys.Contains(prop.Name) Then&#xD;&#xA;            allKeys.Add(prop.Name)&#xD;&#xA;        End If&#xD;&#xA;    Next&#xD;&#xA;Next&#xD;&#xA;&#xD;&#xA;' Create columns&#xD;&#xA;For Each key As String In allKeys&#xD;&#xA;    dt.Columns.Add(key, GetType(String))&#xD;&#xA;Next&#xD;&#xA;&#xD;&#xA;' Fill rows&#xD;&#xA;For Each jt As Newtonsoft.Json.Linq.JToken In jArray&#xD;&#xA;    Dim jo As Newtonsoft.Json.Linq.JObject = CType(jt, Newtonsoft.Json.Linq.JObject)&#xD;&#xA;    Dim row As DataRow = dt.NewRow()&#xD;&#xA;    For Each key As String In allKeys&#xD;&#xA;        If jo(key) IsNot Nothing Then&#xD;&#xA;            row(key) = jo(key).ToString()&#xD;&#xA;        Else&#xD;&#xA;            row(key) = &quot;&quot;&#xD;&#xA;        End If&#xD;&#xA;    Next&#xD;&#xA;    dt.Rows.Add(row)&#xD;&#xA;Next&#xD;&#xA;&#xD;&#xA;ResultDataTable = dt" DisplayName="Invoke Code" sap:VirtualizedContainerService.HintSize="449.6,196.8" sap2010:WorkflowViewState.IdRef="InvokeCode_1">
       <ui:InvokeCode.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="appURL">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="appURL" />
+        <InArgument x:TypeArguments="x:String" x:Key="InvoiceJsonString">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="out_TableData" />
         </InArgument>
+        <OutArgument x:TypeArguments="sd:DataTable" x:Key="ResultDataTable" />
       </ui:InvokeCode.Arguments>
     </ui:InvokeCode>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="449.6,56.8" sap2010:WorkflowViewState.IdRef="CommentOut_1">
-      <ui:CommentOut.Body>
-        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="449.6,173.6" sap2010:WorkflowViewState.IdRef="Sequence_2">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <uwaj:SerializeJson Settings="{x:Null}" DisplayName="Serialize JSON" sap:VirtualizedContainerService.HintSize="416,113.6" sap2010:WorkflowViewState.IdRef="SerializeJson_1" InputObject="[DT_ExtractedData]" Result="[ExtractedTableJSONString]" />
-        </Sequence>
-      </ui:CommentOut.Body>
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-    </ui:CommentOut>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="449.6,56.8" sap2010:WorkflowViewState.IdRef="CommentOut_5">
-      <ui:CommentOut.Body>
-        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="449.6,225.6" sap2010:WorkflowViewState.IdRef="Sequence_6">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <Assign sap:VirtualizedContainerService.HintSize="416,165.6" sap2010:WorkflowViewState.IdRef="Assign_2">
-            <Assign.To>
-              <OutArgument x:TypeArguments="x:String">[out_InputJSON]</OutArgument>
-            </Assign.To>
-            <Assign.Value>
-              <InArgument x:TypeArguments="x:String">[Newtonsoft.Json.JsonConvert.SerializeObject(DT_ExtractedData, Newtonsoft.Json.Formatting.None)]</InArgument>
-            </Assign.Value>
-          </Assign>
-        </Sequence>
-      </ui:CommentOut.Body>
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-    </ui:CommentOut>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="449.6,56.8" sap2010:WorkflowViewState.IdRef="CommentOut_4">
-      <ui:CommentOut.Body>
-        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="449.6,225.6" sap2010:WorkflowViewState.IdRef="Sequence_5">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="416,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;App Request Created&quot;]" />
-        </Sequence>
-      </ui:CommentOut.Body>
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-    </ui:CommentOut>
-    <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="449.6,48" sap2010:WorkflowViewState.IdRef="CommentOut_2">
-      <ui:CommentOut.Body>
-        <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="449.6,329.6" sap2010:WorkflowViewState.IdRef="Sequence_3">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <upau:CreateUserAction AutoCompleteOutcome="{x:Null}" ExternalTag="{x:Null}" Group="{x:Null}" Labels="{x:Null}" PrimaryActionableOutcome="{x:Null}" PrimaryButtonLabel="{x:Null}" ReassignUser="{x:Null}" SecondaryActionableOutcome="{x:Null}" SecondaryButtonLabel="{x:Null}" TaskFieldsForDesktop="{x:Null}" TaskFieldsForWeb="{x:Null}" TaskOutput="{x:Null}" TimeoutMs="{x:Null}" TimerDuration="{x:Null}" ActionableNotification="False" DisplayName="Create App Task" EndCriteria="TaskAssigned" EnforcePropertyRefresh="False" FolderPath="UiPath Project" sap:VirtualizedContainerService.HintSize="416,269.6" sap2010:WorkflowViewState.IdRef="CreateUserAction_2" Outcome="Notify" SolutionApp="UiPath Project Using Table JSON String" SolutionTaskCatalog="InvoiceCatalog" StartCriteria="TaskCreated" TaskCatalog="InvoiceCatalog" TaskPriority="Medium" TaskTimerEnabled="False" TaskTitle="Validat" UserNameOrEmail="anuraj.venkatpurwar@xalta.tech">
-            <upau:CreateUserAction.AppActionData>
-              <InArgument x:TypeArguments="sd:DataTable" x:Key="InputDataTable" x:Name="__ReferenceID0" />
-              <InArgument x:TypeArguments="x:String" x:Key="InputDataTableJson">[ExtractedTableJSONString]</InArgument>
-              <OutArgument x:TypeArguments="sd:DataTable" x:Key="ValidatedDataTable">[in_ValidatedDataTableFromApp]</OutArgument>
-            </upau:CreateUserAction.AppActionData>
-            <upau:CreateUserAction.AppActionPropertiesMetadata>
-              <upama:SchemaPropertiesMetadata x:Key="InputDataTable" Format="DataTable" />
-              <upama:SchemaPropertiesMetadata Format="{x:Null}" x:Key="InputDataTableJson" />
-              <upama:SchemaPropertiesMetadata x:Key="ValidatedDataTable" Format="DataTable" />
-            </upau:CreateUserAction.AppActionPropertiesMetadata>
-            <upau:CreateUserAction.AssignmentCriteria>
-              <upat:Criteria Description="SingleUserDescription" Id="SingleUser" Name="Activity_AssignTasks_AssignmentCriteria_SingleUserName" />
-            </upau:CreateUserAction.AssignmentCriteria>
-            <upau:CreateUserAction.CurrentAppTaskState>
-              <upama:AppTaskState CodeBehindProcessKey="{x:Null}" CodeBehindRuntimeType="{x:Null}" AppId="ID217f18de62f8475dafc0adb9c6f8167b" AppName="UiPath Project Using Table JSON String" AppVersion="2" FolderKey="719ac229-5f90-4230-b11c-b397a87de928" SemVersion="2.0.0" />
-            </upau:CreateUserAction.CurrentAppTaskState>
-            <upau:CreateUserAction.SolutionAppResources>
-              <scg:Dictionary x:TypeArguments="x:String, x:String" />
-            </upau:CreateUserAction.SolutionAppResources>
-            <upau:CreateUserAction.State>
-              <upama:RecordDynamicActionPropertiesState>
-                <upama:RecordDynamicActionPropertiesState.AllowedActions>
-                  <scg:List x:TypeArguments="x:String" Capacity="1">
-                    <x:String>Submit</x:String>
-                  </scg:List>
-                </upama:RecordDynamicActionPropertiesState.AllowedActions>
-                <upama:RecordDynamicActionPropertiesState.SelectedFields>
-                  <scg:List x:TypeArguments="upama:DynamicActionDefinitionSchemaField" Capacity="3">
-                    <upama:DynamicActionDefinitionSchemaField PropertyFormat="{x:Null}" Direction="In" IsRequired="True" Name="InputDataTableJson" PropertyType="System.String">
-                      <upama:DynamicActionDefinitionSchemaField.ArgumentValue>
-                        <InArgument x:TypeArguments="x:String">[ExtractedTableJSONString]</InArgument>
-                      </upama:DynamicActionDefinitionSchemaField.ArgumentValue>
-                    </upama:DynamicActionDefinitionSchemaField>
-                    <upama:DynamicActionDefinitionSchemaField ArgumentValue="{x:Reference __ReferenceID0}" Direction="In" IsRequired="False" Name="InputDataTable" PropertyFormat="DataTable" PropertyType="System.Data.DataTable" />
-                    <upama:DynamicActionDefinitionSchemaField Direction="Out" IsRequired="True" Name="ValidatedDataTable" PropertyFormat="DataTable" PropertyType="System.Data.DataTable">
-                      <upama:DynamicActionDefinitionSchemaField.ArgumentValue>
-                        <OutArgument x:TypeArguments="sd:DataTable">[in_ValidatedDataTableFromApp]</OutArgument>
-                      </upama:DynamicActionDefinitionSchemaField.ArgumentValue>
-                    </upama:DynamicActionDefinitionSchemaField>
-                  </scg:List>
-                </upama:RecordDynamicActionPropertiesState.SelectedFields>
-              </upama:RecordDynamicActionPropertiesState>
-            </upau:CreateUserAction.State>
-          </upau:CreateUserAction>
-        </Sequence>
-      </ui:CommentOut.Body>
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-    </ui:CommentOut>
+    <upau:CreateUserAction AutoCompleteOutcome="{x:Null}" ExternalTag="{x:Null}" Group="{x:Null}" Labels="{x:Null}" PrimaryActionableOutcome="{x:Null}" PrimaryButtonLabel="{x:Null}" ReassignUser="{x:Null}" SecondaryActionableOutcome="{x:Null}" SecondaryButtonLabel="{x:Null}" SolutionTaskCatalog="{x:Null}" TaskCatalog="{x:Null}" TaskFieldsForDesktop="{x:Null}" TaskFieldsForWeb="{x:Null}" TimeoutMs="{x:Null}" TimerDuration="{x:Null}" ActionableNotification="False" DisplayName="Create App Task" EndCriteria="TaskAssigned" EnforcePropertyRefresh="False" FolderPath="UiPath Project" sap:VirtualizedContainerService.HintSize="449.6,526.4" sap2010:WorkflowViewState.IdRef="CreateUserAction_6" Outcome="Notify" SolutionApp="UiPath Project" StartCriteria="TaskCreated" TaskOutput="[AppTaskOutput]" TaskPriority="Medium" TaskTimerEnabled="False" TaskTitle="Invoice info" UserNameOrEmail="anuraj.venkatpurwar@xalta.tech">
+      <upau:CreateUserAction.AppActionData>
+        <OutArgument x:TypeArguments="x:String" x:Key="SuccessMessage" x:Name="__ReferenceID0" />
+        <InOutArgument x:TypeArguments="x:String" x:Key="InputJson">[out_TableData]</InOutArgument>
+      </upau:CreateUserAction.AppActionData>
+      <upau:CreateUserAction.AppActionPropertiesMetadata>
+        <upama:SchemaPropertiesMetadata Format="{x:Null}" x:Key="SuccessMessage" />
+        <upama:SchemaPropertiesMetadata Format="{x:Null}" x:Key="InputJson" />
+      </upau:CreateUserAction.AppActionPropertiesMetadata>
+      <upau:CreateUserAction.AssignmentCriteria>
+        <upat:Criteria Description="SingleUserDescription" Id="SingleUser" Name="Activity_AssignTasks_AssignmentCriteria_SingleUserName" />
+      </upau:CreateUserAction.AssignmentCriteria>
+      <upau:CreateUserAction.CurrentAppTaskState>
+        <upama:AppTaskState CodeBehindProcessKey="{x:Null}" CodeBehindRuntimeType="{x:Null}" AppId="ID56c601c740a945368f7e3a7c0f79182d" AppName="UiPath Project" AppVersion="5" FolderKey="719ac229-5f90-4230-b11c-b397a87de928" SemVersion="5.0.0" />
+      </upau:CreateUserAction.CurrentAppTaskState>
+      <upau:CreateUserAction.SolutionAppResources>
+        <scg:Dictionary x:TypeArguments="x:String, x:String" />
+      </upau:CreateUserAction.SolutionAppResources>
+      <upau:CreateUserAction.State>
+        <upama:RecordDynamicActionPropertiesState>
+          <upama:RecordDynamicActionPropertiesState.AllowedActions>
+            <scg:List x:TypeArguments="x:String" Capacity="1">
+              <x:String>Submit</x:String>
+            </scg:List>
+          </upama:RecordDynamicActionPropertiesState.AllowedActions>
+          <upama:RecordDynamicActionPropertiesState.SelectedFields>
+            <scg:List x:TypeArguments="upama:DynamicActionDefinitionSchemaField" Capacity="2">
+              <upama:DynamicActionDefinitionSchemaField ArgumentValue="{x:Reference __ReferenceID0}" PropertyFormat="{x:Null}" Direction="Out" IsRequired="False" Name="SuccessMessage" PropertyType="System.String" />
+              <upama:DynamicActionDefinitionSchemaField PropertyFormat="{x:Null}" Direction="InOut" IsRequired="False" Name="InputJson" PropertyType="System.String">
+                <upama:DynamicActionDefinitionSchemaField.ArgumentValue>
+                  <InOutArgument x:TypeArguments="x:String">[out_TableData]</InOutArgument>
+                </upama:DynamicActionDefinitionSchemaField.ArgumentValue>
+              </upama:DynamicActionDefinitionSchemaField>
+            </scg:List>
+          </upama:RecordDynamicActionPropertiesState.SelectedFields>
+        </upama:RecordDynamicActionPropertiesState>
+      </upau:CreateUserAction.State>
+    </upau:CreateUserAction>
+    <upau:WaitForUserActionAndResume StatusMessage="{x:Null}" TaskAction="{x:Null}" TimeoutMs="{x:Null}" WaitItemDataObject="{x:Null}" DisplayName="Wait for App Task and Resume" sap:VirtualizedContainerService.HintSize="449.6,113.6" sap2010:WorkflowViewState.IdRef="WaitForUserActionAndResume_1" TaskInput="[AppTaskOutput]" TaskOutput="[TaskObject]" />
   </Sequence>
 </Activity>
